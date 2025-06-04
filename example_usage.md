@@ -12,31 +12,31 @@ Or with Docker:
 ```bash
 cd api
 docker build -t data-transform .
-docker run -p 5000:5000 data-transform
+docker run -p 5001:5001 data-transform
 ```
 
 ## API Endpoints
 
 ### 1. Health Check
 ```bash
-curl http://localhost:9999/health
+curl http://localhost:5001/health
 ```
 
 ### 2. Get Available Transformations
 ```bash
-curl http://localhost:9999/transformations
+curl http://localhost:5001/transformations
 ```
 
 ### 3. Enable/Disable Transformations
 ```bash
-curl -X POST http://localhost:5000/transformations/filter_rows/enable \
+curl -X POST http://localhost:5001/transformations/filter_rows/enable \
   -H "Content-Type: application/json" \
   -d '{"enabled": false}'
 ```
 
 ### 4. Transform Data
 ```bash
-curl -X POST http://localhost:5000/transform \
+curl -X POST http://localhost:5001/transform \
   -F "file=@data.csv" \
   -F 'pipeline=[
     {
