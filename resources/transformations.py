@@ -1,6 +1,5 @@
 from flask import request
 from flask_restful import Resource
-from flasgger.utils import swag_from
 from common import TransformationRegistry
 
 registry = TransformationRegistry()
