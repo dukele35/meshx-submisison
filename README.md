@@ -4,16 +4,53 @@ A Flask-based REST API for performing data transformations on CSV files with con
 
 ## Installation and Setup
 
+### Local Development
+
 ```bash
 pip install -r requirements.txt
 python app.py
 ```
 
-Or with Docker:
+### Docker Deployment
+
+#### Quick Start with Docker Compose
+
+```bash
+# Run the main application
+docker-compose up -d data-transformer
+
+# Run with all services (Redis cache + Prometheus monitoring)
+docker-compose --profile monitoring up -d
+
+# View logs
+docker-compose logs -f data-transformer
+
+# Stop services
+docker-compose down
+```
+
+#### Manual Docker Build
+
 ```bash
 docker build -t data-transform .
 docker run -p 5001:5001 data-transform
 ```
+
+#### Docker Services
+
+The Docker Compose setup includes:
+
+- **data-transformer**: Main Flask application (port 5001)
+- **redis**: Redis cache for future enhancements (port 6379) 
+- **prometheus**: Monitoring and metrics collection (port 9090) - optional with `--profile monitoring`
+
+#### Docker Features
+
+- **Health checks**: Automatic container health monitoring
+- **Non-root user**: Security best practices
+- **Volume mounting**: Persistent logs and data
+- **Network isolation**: Services communicate via dedicated network
+- **Auto-restart**: Containers restart automatically on failure
 
 ## API Endpoints
 
