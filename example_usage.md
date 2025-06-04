@@ -3,14 +3,12 @@
 ## Running the API
 
 ```bash
-cd api
 pip install -r requirements.txt
-python api.py
+python app.py
 ```
 
 Or with Docker:
 ```bash
-cd api
 docker build -t data-transform .
 docker run -p 5001:5001 data-transform
 ```
@@ -31,7 +29,7 @@ curl http://localhost:5001/transformations
 ```bash
 curl -X POST http://localhost:5001/transformations/filter_rows/enable \
   -H "Content-Type: application/json" \
-  -d '{"enabled": false}'
+  -d '{"enabled": true}'
 ```
 
 ### 4. Transform Data
