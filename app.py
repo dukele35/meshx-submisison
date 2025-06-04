@@ -2,6 +2,7 @@ import logging
 import time
 from flask import Flask, request, g
 from flask_restful import Api
+from flasgger import Swagger
 from waitress import serve
 from resources import HealthCheck, Transformations, TransformationToggle, Transform
 
@@ -16,6 +17,7 @@ logging.basicConfig(
 
 app = Flask(__name__)
 api = Api(app)
+swagger = Swagger(app)
 
 @app.before_request
 def before_request():

@@ -1,5 +1,6 @@
 from flask import request
 from flask_restful import Resource
+from flasgger.utils import swag_from
 import pandas as pd
 import io
 import json
@@ -11,6 +12,60 @@ pipeline = DataTransformationPipeline(registry)
 
 class Transform(Resource):
     def post(self):
+        """
+        Transform CSV Data
+        ---
+        tags:
+          - Transform
+        consumes:
+          - multipart/form-data
+        parameters:
+          - name: file
+            in: formData
+            type: file
+            required: true
+            description: CSV file to transform
+          - name: pipeline
+            in: formData
+            type: string
+            required: true
+            description: JSON configuration for transformation pipeline
+            example: '{"steps": [{"name": "normalize", "params": {}}]}'
+        responses:
+          200:
+            description: Data transformed successfully
+            schema:
+              type: object
+              properties:
+                original_shape:
+                  type: array
+                  items:
+                    type: integer
+                  example: [100, 5]
+                transformed_shape:
+                  type: array
+                  items:
+                    type: integer
+                  example: [100, 5]
+                data:
+                  type: array
+                  items:
+                    type: object
+          400:
+            description: Bad request - missing file or invalid parameters
+            schema:
+              type: object
+              properties:
+                error:
+                  type: string
+          500:
+            description: Internal server error
+            schema:
+              type: object
+              properties:
+                error:
+                  type: string
+        """
         try:
             if 'file' not in request.files:
                 return {'error': 'No file provided'}, 400
