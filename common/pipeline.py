@@ -6,7 +6,7 @@ through a sequence of registered transformations.
 
 import pandas as pd
 from typing import Dict, Any, List
-from registry import TransformationRegistry
+from .registry import TransformationRegistry
 
 
 class DataTransformationPipeline:

@@ -1,6 +1,6 @@
 from flask import request
 from flask_restful import Resource
-from registry import TransformationRegistry
+from common import TransformationRegistry
 
 registry = TransformationRegistry()
 

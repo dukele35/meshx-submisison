@@ -3,8 +3,7 @@ from flask_restful import Resource
 import pandas as pd
 import io
 import json
-from registry import TransformationRegistry
-from pipeline import DataTransformationPipeline
+from common import TransformationRegistry, DataTransformationPipeline
 
 registry = TransformationRegistry()
 pipeline = DataTransformationPipeline(registry)
