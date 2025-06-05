@@ -100,10 +100,32 @@ curl -X POST http://localhost:5001/transform \
   ]'
 ```
 
+## Security & Validation Features
+
+The API includes comprehensive security and validation features:
+
+### File Validation
+- **File type checking**: Validates both file extension and MIME type for CSV files
+- **File size limits**: Maximum 10MB file size to prevent abuse
+- **Empty file detection**: Rejects zero-byte files
+- **Malicious content scanning**: Basic pattern detection for potentially dangerous content
+
+### Input Sanitization
+- **Pipeline structure validation**: Strict JSON schema validation with detailed error messages
+- **Resource limits**: Maximum 10 transformation steps and 100 CSV columns
+- **Backward compatibility**: Supports both legacy and current pipeline formats
+- **Parameter validation**: Type checking for all transformation parameters
+
+### Error Handling
+- **Specific error messages**: Clear, actionable feedback for validation failures
+- **Proper HTTP status codes**: Returns appropriate 400/500 status codes
+- **CSV validation**: Handles malformed CSV files, encoding issues, and parser errors
+
 ## Pipeline Configuration Format
 
-The pipeline is defined as a JSON array of transformation steps:
+The pipeline supports two formats for backward compatibility:
 
+### Current Format (Recommended)
 ```json
 [
   {
@@ -114,6 +136,21 @@ The pipeline is defined as a JSON array of transformation steps:
     }
   }
 ]
+```
+
+### Legacy Format (Still Supported)
+```json
+{
+  "steps": [
+    {
+      "name": "transformation_name",
+      "params": {
+        "parameter1": "value1",
+        "parameter2": "value2"
+      }
+    }
+  ]
+}
 ```
 
 ## Available Transformations

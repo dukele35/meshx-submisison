@@ -90,7 +90,7 @@ class TestTransformEndpoint:
             'pipeline': pipeline_config
         }
         response = client.post('/transform', data=data)
-        assert response.status_code == 500
+        assert response.status_code == 400  # Changed from 500 to 400 for better validation
         data = response.get_json()
         assert 'error' in data
 
